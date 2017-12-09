@@ -23,7 +23,26 @@ export class AuthenticationService {
    }
 
   loginWithFacebook() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(() =>{
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then((data) =>{
+      this.router.navigate(['/home']);
+    });
+  }
+
+  authorizeUser(data){
+    if(this.isAuthorized(data.user.email)){
+      this.router.navigate(['/home']);
+    }else{
+      this.router.navigate(['/login']);
+    }
+  }
+
+  // Cambiar para que vaya a base de datos y cheque por los correos autorizados
+  isAuthorized(email: string): boolean{
+    return email == "rubencg88@gmail.com";
+  }
+
+  loginWithGoogle() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data) =>{
       this.router.navigate(['/home']);
     });
   }
