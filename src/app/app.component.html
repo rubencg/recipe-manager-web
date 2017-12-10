@@ -6,9 +6,9 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" *ngIf="userLogged()">
     <ul class="navbar-nav">
-      <li class="nav-item dropdown dropdown-dark bg-dark">
+      <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Mi plan
         </a>
@@ -17,7 +17,7 @@
           <a class="dropdown-item" href="#">Lista del super</a>
         </div>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="#">Recetas</a>
       </li>
     </ul>
@@ -28,28 +28,11 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="profileDropdownMenuLink">
           <a class="dropdown-item" href="#">Mis opciones</a>
-          <a class="dropdown-item" href="#">Cerrar Sesion</a>
+          <a class="dropdown-item" (click)="logout()" >Cerrar Sesion</a>
         </div>
       </li>
     </ul>
   </div>
 </nav>
-
-<!-- <nav class="navbar navbar-dark bg-dark">
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Longer nav link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-  </ul>
-</nav> -->
 
 <router-outlet></router-outlet>
