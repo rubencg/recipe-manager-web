@@ -24,13 +24,13 @@ export class AuthenticationService {
 
   loginWithFacebook() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then((data) =>{
-      this.router.navigate(['/home']);
+      this.router.navigate(['/recipe-list']);
     });
   }
 
   authorizeUser(data){
     if(this.isAuthorized(data.user.email)){
-      this.router.navigate(['/home']);
+      this.router.navigate(['/recipe-list']);
     }else{
       this.router.navigate(['/login']);
     }
@@ -43,7 +43,7 @@ export class AuthenticationService {
 
   loginWithGoogle() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data) =>{
-      this.router.navigate(['/home']);
+      this.router.navigate(['/recipe-list']);
     });
   }
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { LoginComponent } from './login/login.component';
 import { GroceryListComponent } from './grocery-list/grocery-list.component';
 
@@ -8,6 +8,6 @@ import { GroceryListComponent } from './grocery-list/grocery-list.component';
   imports: [
     CommonModule
   ],
-  declarations: [HomeComponent, LoginComponent, GroceryListComponent]
+  declarations: [RecipeListComponent, LoginComponent, GroceryListComponent]
 })
 export class PagesModule { }

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { HomeComponent } from './pages/home/home.component';
+import { RecipeListComponent } from './pages/recipe-list/recipe-list.component';
 import { LoginComponent } from './pages/login/login.component';
 import { GroceryListComponent } from './pages/grocery-list/grocery-list.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'recipe-list', component: RecipeListComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  // otherwise redirect to home
-  { path: '**', redirectTo: 'home' }
+  // otherwise redirect to recipe-list
+  { path: '**', redirectTo: 'recipe-list' }
 ];
 
 @NgModule({
