@@ -8,7 +8,7 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
 
 const routes: Routes = [
   { path: 'recipe-list', component: RecipeListComponent, canActivate: [AuthGuard] },
-  { path: 'recipe', component: RecipeComponent, canActivate: [AuthGuard] },
+  { path: 'recipe/:id', component: RecipeComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   // otherwise redirect to recipe-list
