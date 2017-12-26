@@ -1,0 +1,13 @@
+<h2>Frutas {{id}} </h2>
+<div class="grocery-container">
+    <div class="d-flex flex-wrap">
+       <div class="card grocery-card" [routerLink]="['/grocery-list',1]" *ngFor="let element of elements">
+          <div class="card-body form-check ">
+             <label class="form-check-label">
+             <input class="form-check-input" type="checkbox" value="">
+             <span class="grocery-number">{{element.quantity}}</span> {{element.name}}
+             </label>
+          </div>
+       </div>
+    </div>
+ </div>

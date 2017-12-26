@@ -5,12 +5,13 @@ import { LoginComponent } from './login/login.component';
 import { GroceryListComponent } from './grocery-list/grocery-list.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { RouterModule } from '@angular/router';
+import { GroceryComponent } from './grocery/grocery.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule
   ],
-  declarations: [RecipeListComponent, LoginComponent, GroceryListComponent, RecipeComponent]
+  declarations: [RecipeListComponent, LoginComponent, GroceryListComponent, RecipeComponent, GroceryComponent]
 })
 export class PagesModule { }
