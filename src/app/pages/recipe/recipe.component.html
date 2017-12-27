@@ -1,31 +1,25 @@
 <div class="container recipe-container">
   <div class="container image-container">
     <div class="row image">
-
     </div>
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1>Receta de zanahoria # {{id}} </h1>
+        <h1>{{recipe.name}}</h1>
       </div>
     </div>
     <div class="row recipe">
       <div class="col">
         <h4>Ingredientes:</h4>
         <ul>
-          <li>Ingrediente 1</li>
-          <li>Ingrediente 2</li>
-          <li>Ingrediente 3</li>
-          <li>Ingrediente 4</li>
-          <li>Ingrediente 5</li>
+          <li *ngFor="let i of recipe.ingredients">{{i}}</li>
         </ul>
       </div>
       <div class="col-sm-8">
         <h4>Preparacion:</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut nisi sed mauris aliquet lobortis lacinia nec diam. Aliquam vestibulum turpis ante, nec tincidunt magna pulvinar ac. Aliquam ullamcorper elit a massa efficitur mollis id at velit. Cras posuere euismod odio. Cras vitae tristique tellus. Praesent at vestibulum enim. Maecenas nec justo nec augue viverra ornare. Cras placerat, nulla eget pulvinar placerat, urna lectus iaculis enim, eget finibus ex sapien a mi.</p>
-        <p>Pellentesque gravida iaculis elit at tincidunt. Quisque in enim lorem. Donec placerat accumsan ante, ut commodo neque. Curabitur et mauris elementum, ullamcorper augue aliquet, mollis purus. Integer condimentum cursus diam eu iaculis. In id nisi lacus. Donec porta dui nec odio egestas, ut iaculis augue aliquet. Cras lectus lacus, ultrices sit amet tristique eget, sagittis eget erat. Cras commodo euismod sem, ut commodo dolor tincidunt sit amet. Aenean feugiat neque ac neque efficitur faucibus. Aliquam nulla massa, pellentesque at ullamcorper eget, volutpat ac nisl. Duis vel elementum tortor. Nulla at feugiat justo.</p>
+        <p *ngFor="let i of recipe.instructions">{{i}}</p>
       </div>
     </div>
   </div>

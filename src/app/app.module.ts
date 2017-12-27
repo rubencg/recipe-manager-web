@@ -10,6 +10,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { PagesModule } from './pages/pages.module';
 import { AuthGuard } from './guards/auth.guard';
+import { RecipeService } from './services/recipe.service';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { AuthGuard } from './guards/auth.guard';
     AngularFireModule.initializeApp(environment.firebase),
     PagesModule
   ],
-  providers: [ AuthenticationService, AngularFireAuth, AuthGuard ],
+  providers: [ AuthenticationService, AngularFireAuth, AuthGuard, RecipeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

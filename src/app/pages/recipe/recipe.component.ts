@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RecipeService, Recipe } from '../../services/recipe.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-recipe',
@@ -8,14 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecipeComponent implements OnInit {
   id: number;
-  sub;
-  constructor(private route: ActivatedRoute) { }
+  recipe: Recipe;
+  
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+    let sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
 
-      // In a real app: dispatch action to load the details here.
+      let recipes : Recipe[] = this.recipeService.getAllRecipes();
+      this.recipe = _.first(_.filter(recipes, r => r.id == this.id));
+      
    });
   }
 
