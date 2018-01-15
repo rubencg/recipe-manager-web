@@ -20,6 +20,10 @@ export class RecipeService {
     return this.recipeRef;
   }
 
+  save(recipe: Recipe){
+    this.db.list('recipes').push(recipe);
+  }
+
 }
 
 export interface Recipe {

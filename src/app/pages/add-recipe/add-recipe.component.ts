@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe, Ingredient } from '../../services/recipe.service';
+import { Recipe, Ingredient, RecipeService } from '../../services/recipe.service';
 import { Group } from '../../models/interfaces';
 import { element } from 'protractor';
 
@@ -16,7 +16,7 @@ export class AddRecipeComponent implements OnInit {
   private foodTime: number = 1;
   private ingredients: string;
 
-  constructor() { }
+  constructor(private recipeService : RecipeService) { }
 
   ngOnInit() {
   }
@@ -41,7 +41,7 @@ export class AddRecipeComponent implements OnInit {
       recipe.ingredients.push(i);
     });
     
-    console.log(recipe);
+    this.recipeService.save(recipe);
     
   }
 
