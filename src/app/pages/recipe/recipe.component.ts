@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService, Recipe } from '../../services/recipe.service';
 import * as _ from 'lodash';
+import { Unit } from '../../models/interfaces';
 
 @Component({
   selector: 'app-recipe',
@@ -23,6 +24,10 @@ export class RecipeComponent implements OnInit {
       });
       
    });
+  }
+
+  getUnitName(unitId: number){
+    return Unit[unitId];
   }
 
 }
