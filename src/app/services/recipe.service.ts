@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { FoodTime, Group, Unit } from '../models/interfaces';
 
 
 @Injectable()
@@ -24,13 +25,15 @@ export class RecipeService {
 export interface Recipe {
   key?: string;
   name: string;
-  ingredients?: string[];
+  ingredients?: Ingredient[];
   image?: string;
-  instructions?: string[];
+  instructions?: string;
+  foodTime?: FoodTime;
+  group?: Group;
 }
 
 export interface Ingredient{
   name: string;
   quantity: number;
-  unitId: number;
+  unit: Unit;
 }
