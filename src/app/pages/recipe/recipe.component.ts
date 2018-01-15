@@ -9,17 +9,18 @@ import * as _ from 'lodash';
   styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent implements OnInit {
-  id: number;
+  id: string;
   recipe: Recipe;
   
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit() {
     let sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
+      this.id = params['id']; // (+) converts string 'id' to a number
 
-      let recipes : Recipe[] = this.recipeService.getAllRecipes();
-      this.recipe = _.first(_.filter(recipes, r => r.id == this.id));
+      this.recipeService.getAllRecipes().subscribe(recipes => {
+        this.recipe = _.first(_.filter(recipes, r => r.key == this.id));
+      });
       
    });
   }

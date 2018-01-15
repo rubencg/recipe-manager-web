@@ -1,4 +1,4 @@
-<div class="container recipe-container">
+<div class="container recipe-container" *ngIf="recipe">
   <div class="container image-container">
     <div class="row image">
     </div>
@@ -14,12 +14,12 @@
       <div class="col">
         <h4>Ingredientes:</h4>
         <ul>
-          <li *ngFor="let i of recipe.ingredients">{{i}}</li>
+          <li *ngFor="let i of recipe.ingredients">{{i.quantity}} {{i.name}}</li>
         </ul>
       </div>
       <div class="col-sm-8">
         <h4>Preparacion:</h4>
-        <p *ngFor="let i of recipe.instructions">{{i}}</p>
+        <p>{{recipe.instructions}}</p>
       </div>
     </div>
   </div>

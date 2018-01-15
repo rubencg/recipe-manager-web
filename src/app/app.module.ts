@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { environment } from './environment';
 import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { PagesModule } from './pages/pages.module';
 import { AuthGuard } from './guards/auth.guard';
 import { RecipeService } from './services/recipe.service';
@@ -23,7 +24,7 @@ import { RecipeService } from './services/recipe.service';
     AngularFireModule.initializeApp(environment.firebase),
     PagesModule
   ],
-  providers: [ AuthenticationService, AngularFireAuth, AuthGuard, RecipeService ],
+  providers: [ AuthenticationService, AngularFireAuth, AuthGuard, RecipeService, AngularFireDatabase ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
