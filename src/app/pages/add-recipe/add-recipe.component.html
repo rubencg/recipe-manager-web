@@ -11,12 +11,6 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="instructionsTextArea" class="col-sm-2 col-form-label">Preparacion</label>
-      <div class="col-sm-10">
-        <textarea class="form-control" id="instructionsTextArea" name="instructionsTextArea" rows="3" [(ngModel)]="instructions"></textarea>
-      </div>
-    </div>
-    <div class="form-group row">
       <label for="inputFoodGroup" class="col-sm-2 col-form-label">Grupo de comida</label>
       <div class="col-sm-10">
         <select id="inputFoodGroup" name="inputFoodGroup" class="form-control" [(ngModel)]="group">
@@ -39,9 +33,43 @@
         </select>
       </div>
     </div>
+    <div class="form-group row">
+      <label for="inputServes" class="col-sm-2 col-form-label">Platos</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputServes" name="inputServes" [(ngModel)]="serves">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPrepTime" class="col-sm-2 col-form-label">Tiempo de preparacion</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputPrepTime" name="inputPrepTime" [(ngModel)]="prepTime" placeholder="En minutos">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputCookTime" class="col-sm-2 col-form-label">Tiempo de coccion</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputCookTime" name="inputCookTime" [(ngModel)]="cookTime" placeholder="En minutos">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputDifficulty" class="col-sm-2 col-form-label">Tiempo</label>
+      <div class="col-sm-10">
+        <select id="inputDifficulty" name="inputDifficulty" class="form-control" [(ngModel)]="difficulty">
+          <option selected value="1">Facil</option>
+          <option selected value="2">Medio</option>
+          <option selected value="3">Dificil</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="instructionsTextArea" class="col-sm-2 col-form-label">Preparacion</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="instructionsTextArea" name="instructionsTextArea" rows="3" [(ngModel)]="instructions"></textarea>
+      </div>
+    </div>
     <div>
       <h5>Ingredientes</h5>
-      <span style="color: gray;">nombre,cantidad,tipo(oz,pz,cup,tsp,tbsp,hf,shf,lb)</span>
+      <span style="color: gray;">nombre,cantidad,comida(1=Fruta, 2=Vegetales, 3=Granos, 4=Despensa, 5=Proteina, 6=Otros),tipo(oz,pz,cup,tsp,tbsp,hf,shf,lb)</span>
       <textarea class="form-control" id="instructionsTextArea" name="instructionsTextArea" rows="3" placeholder="" [(ngModel)]="ingredients"></textarea>
       <!-- <div class="form-inline">
         <div class="form-group mx-sm-3 mb-2">

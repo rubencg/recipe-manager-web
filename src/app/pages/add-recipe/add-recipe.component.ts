@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe, Ingredient, RecipeService } from '../../services/recipe.service';
-import { Group } from '../../models/interfaces';
+import { Group, Difficulty } from '../../models/interfaces';
 import { element } from 'protractor';
 
 @Component({
@@ -15,6 +15,10 @@ export class AddRecipeComponent implements OnInit {
   private group: number = 1;
   private foodTime: number = 1;
   private ingredients: string;
+  private difficulty: Difficulty = 1;
+  private serves: number = 1;
+  private cookTime: number;
+  private prepTime: number;
 
   constructor(private recipeService : RecipeService) { }
 
@@ -27,6 +31,10 @@ export class AddRecipeComponent implements OnInit {
       instructions: this.instructions,
       group: this.group,
       foodTime: this.foodTime,
+      cookTime: this.cookTime,
+      difficulty: this.difficulty,
+      prepTime: this.prepTime,
+      serves: this.serves,
       ingredients: []
     }
     let ingredients: string[] = this.ingredients.split(/\r?\n/);
@@ -36,7 +44,8 @@ export class AddRecipeComponent implements OnInit {
       let i: Ingredient = {
         name: elements[0],
         quantity: +elements[1],
-        unit: +elements[2]
+        foodGroup: +elements[2],
+        unit: +elements[3]
       };
       recipe.ingredients.push(i);
     });

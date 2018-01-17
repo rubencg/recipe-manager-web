@@ -32,3 +32,9 @@ export enum Group {
     C,
     D
 }
+
+export enum Difficulty {
+    Easy,
+    Medium,
+    Difficult
+}
