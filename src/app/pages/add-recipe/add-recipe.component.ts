@@ -77,28 +77,20 @@ export class AddRecipeComponent implements OnInit {
     switch (s) {
     case "cup":
       return Unit.cup;
-      break;
     case "hf":
       return Unit.hf;
-      break;
     case "lb":
       return Unit.lb;
-      break;
     case "oz":
       return Unit.oz;
-      break;
     case "pz":
       return Unit.pz;
-      break;
     case "shf":
       return Unit.shf;
-      break;
     case "tbsp":
       return Unit.tbsp;
-      break;
     case "tsp":
       return Unit.tsp;
-      break;
     }
   }
 
@@ -107,22 +99,16 @@ export class AddRecipeComponent implements OnInit {
     switch (s) {
       case "f":
         return FoodGroup.Fruit
-        break;
       case "v":
         return FoodGroup.Vegetable
-        break;
       case "g":
         return FoodGroup.Grains
-        break;
       case "l":
         return FoodGroup.Dairy
-        break;
       case "p":
         return FoodGroup.Proteins
-        break;
       case "o":
         return FoodGroup.Others
-        break;
     }
   }
 
