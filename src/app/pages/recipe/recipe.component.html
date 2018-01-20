@@ -1,6 +1,11 @@
 <div class="container recipe-container" *ngIf="recipe">
   <div class="container image-container">
-    <div class="row image">
+    <div *ngIf="recipe.image"  class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm"><img class="image" [src]="recipe.image" alt="Card image cap"></div>
+        <div class="col-sm"></div>
+    </div>
+    <div *ngIf="!recipe.image"  class="row image-black">
     </div>
   </div>
 
