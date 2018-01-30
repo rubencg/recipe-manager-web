@@ -13,6 +13,7 @@ export class RecipesOverviewComponent implements OnInit {
   recipes: Recipe[]= [];
   filteredRecipes: Recipe[]= [];
   timeTitle = "Hora del Dia";
+  filterText = "";
 
   constructor(private recipeService: RecipeService) { }
 
@@ -21,6 +22,10 @@ export class RecipesOverviewComponent implements OnInit {
       this.recipes = recipes;
       this.filteredRecipes = recipes;
     })
+  }
+
+  search(){
+    this.filteredRecipes = _.filter(this.recipes, (r: Recipe) => r.name.toLowerCase().includes(this.filterText.toLowerCase()));
   }
 
   selectTime(foodTime: FoodTime){
@@ -50,6 +55,6 @@ export class RecipesOverviewComponent implements OnInit {
     }else{
       this.filteredRecipes = this.recipes;
     }
-    
+    this.filterText = "";
   }
 }

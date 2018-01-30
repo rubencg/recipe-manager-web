@@ -34,9 +34,9 @@
         </div>
       <div class="col-lg-6">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Palabra clave..." aria-label="Palabra clave...">
+          <input type="text" class="form-control" placeholder="Palabra clave..." aria-label="Palabra clave..." [(ngModel)]="filterText">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button">Buscar!</button>
+            <button class="btn btn-secondary" type="button" (click)="search()" >Buscar!</button>
           </span>
         </div>
       </div>
