@@ -11,6 +11,8 @@ import { RecipesOverviewComponent } from './pages/recipes-overview/recipes-overv
 import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
 
 const routes: Routes = [
+  { path: 'recipe-list/:weekId/:dayId', component: RecipeListComponent, canActivate: [AuthGuard] },
+  { path: 'recipe-list/:weekId', component: RecipeListComponent, canActivate: [AuthGuard] },
   { path: 'recipe-list', component: RecipeListComponent, canActivate: [AuthGuard] },
   { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard],
     children: [

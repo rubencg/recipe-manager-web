@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe, RecipeService } from '../../services/recipe.service';
-import { FoodTime, Week } from '../../models/interfaces';
+import { FoodTime, Week, Utils } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { WeekRecipeService } from '../../services/week-recipe.service';
 
@@ -30,7 +30,7 @@ export class RecipesOverviewComponent implements OnInit {
     });
     this.weekService.getAllWeeks().subscribe((weeks: Week[]) => {
       this.weeks = weeks;
-    })
+    });
 
   }
 
@@ -51,27 +51,8 @@ export class RecipesOverviewComponent implements OnInit {
   }
 
   filter(){
-    switch (this.foodTime) {
-      case FoodTime.Breakfast:
-        this.timeTitle = "Desayuno";
-        break;
-      case FoodTime.AMSnack:
-        this.timeTitle = "A.M. Snack";
-        break;
-      case FoodTime.Lunch:
-        this.timeTitle = "Comida";
-        break;
-      case FoodTime.PMSnack:
-        this.timeTitle = "P.M. Snack";
-        break;
-      case FoodTime.Dinner:
-        this.timeTitle = "Cena";
-        break;
-      default:
-        this.timeTitle = "Hora del Dia";
-        break;
-    }
-
+    this.timeTitle = Utils.getFoodTimeName(this.foodTime);
+    
     this.filteredRecipes = this.recipes;
 
     if(this.foodTime != -1){

@@ -9,9 +9,9 @@
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ weekTitle }}
           </button>
-          <div class="dropdown-menu" *ngFor="let week of weeks">
+          <div class="dropdown-menu">
             <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" (click)="selectWeek(null)">Borrar</a>
-            <a class="dropdown-item" (click)="selectWeek(week.name)" >Semana {{ week.name }}</a>
+            <a *ngFor="let week of weeks" class="dropdown-item" (click)="selectWeek(week.name)" >Semana {{ week.name }}</a>
           </div>
         </div>
       </div>
