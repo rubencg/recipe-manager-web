@@ -22,5 +22,8 @@ export class WeekRecipeService {
   save(week: Week){
     this.db.list('weekRecipes').push(week);
   }
+  update(week: Week){
+    this.db.list('weekRecipes').update(week.key, week);
+  }
 
 }

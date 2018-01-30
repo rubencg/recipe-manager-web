@@ -50,7 +50,7 @@ export interface Week{
 export interface WeekRecipe{
     DayOrderId: number; //1-7 Monday - Sunday
     FoodTime: FoodTime;
-    RecipeId: number;
+    RecipeId: string;
     RecipeImage?: string;
     RecipeName: string;
 }

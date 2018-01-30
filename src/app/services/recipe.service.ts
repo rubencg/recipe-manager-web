@@ -21,7 +21,7 @@ export class RecipeService {
   }
 
   save(recipe: Recipe){
-    this.db.list('recipes').push(recipe);
+    return this.db.list('recipes').push(recipe);
   }
 
 }

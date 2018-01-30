@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe, Ingredient, RecipeService } from '../../services/recipe.service';
-import { Group, Difficulty, FoodGroup, Unit } from '../../models/interfaces';
+import { Group, Difficulty, FoodGroup, Unit, Week } from '../../models/interfaces';
 import { element } from 'protractor';
+import { WeekRecipeService } from '../../services/week-recipe.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-add-recipe',
@@ -9,7 +11,8 @@ import { element } from 'protractor';
   styleUrls: ['./add-recipe.component.scss']
 })
 export class AddRecipeComponent implements OnInit {
-
+  private weekName: string;
+  private isNewWeek: boolean = false;
   private name: string;
   private instructions: string;
   private group: number = 1;
@@ -19,8 +22,13 @@ export class AddRecipeComponent implements OnInit {
   private serves: number = 1;
   private cookTime: number = null;
   private prepTime: number = null;
+  private day: number = 1;
 
-  constructor(private recipeService : RecipeService) { }
+  constructor(private recipeService : RecipeService, private weekService: WeekRecipeService) {
+    this.recipeService.getAllRecipes();
+    this.weekService.getAllWeeks();
+
+   }
 
   ngOnInit() {
   }
@@ -51,13 +59,36 @@ export class AddRecipeComponent implements OnInit {
         recipe.ingredients.push(i);
       });
       
-      this.recipeService.save(recipe); 
+      this.recipeService.save(recipe).then( (r: Recipe) => {
+        let week: Week;
+        let update: boolean = true;
+        if(this.isNewWeek){
+          week = _.first(_.filter(this.weekService.weeks, (w: Week) => w.name == this.weekName));
+          if(!week){
+            update = false;
+            week = {
+              name: this.weekName,
+              recipes: []
+            };
+          }
+          week.recipes.push({
+            DayOrderId: this.day,
+            FoodTime: recipe.foodTime,
+            RecipeId: r.key,
+            RecipeName: recipe.name
+          })
+        }
+        if(update){
+          this.weekService.update(week);
+        }else{
+          this.weekService.save(week);
+        }
 
-      this.clear();
+        this.clear();
+      }); 
     }catch(err){
       alert(err);
     }
-    
   }
 
   clear(){
