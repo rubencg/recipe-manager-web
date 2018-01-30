@@ -7,13 +7,11 @@
       <div class="col-lg-3">
         <div class="btn-group">
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Semana
+            {{ weekTitle }}
           </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item">Semana 1</a>
-            <a class="dropdown-item">Semana 2</a>
-            <a class="dropdown-item">Semana 3</a>
-            <a class="dropdown-item">Semana 4</a>
+          <div class="dropdown-menu" *ngFor="let week of weeks">
+            <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" (click)="selectWeek(null)">Borrar</a>
+            <a class="dropdown-item" (click)="selectWeek(week.name)" >Semana {{ week.name }}</a>
           </div>
         </div>
       </div>
