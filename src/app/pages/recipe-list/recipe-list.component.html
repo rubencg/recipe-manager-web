@@ -1,8 +1,8 @@
 <div class="container-fluid recipe-list-container">
-  <div *ngIf="activeDay == -1" class="row justify-content-md-center">
+  <div *ngIf="!this.weeks" class="row justify-content-md-center">
     Cargando...
   </div>
-  <div *ngIf="activeDay > 0" class="row justify-content-md-center">
+  <div *ngIf="this.weeks" class="row justify-content-md-center">
     <div class="col-2">
       <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
