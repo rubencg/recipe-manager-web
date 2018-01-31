@@ -1,5 +1,8 @@
 <div class="container-fluid recipe-list-container">
-  <div class="row justify-content-md-center">
+  <div *ngIf="activeDay == -1" class="row justify-content-md-center">
+    Cargando...
+  </div>
+  <div *ngIf="activeDay > 0" class="row justify-content-md-center">
     <div class="col-2">
       <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -15,7 +18,7 @@
       <nav aria-label="Page navigation example pagination-container">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="#">Anterior</a>
+            <a class="page-link" (click)="previous()">Anterior</a>
           </li>
           <li *ngFor="let day of days" class="page-item" [class.active]="day.dayId == activeDay">
             <a class="page-link" [routerLink]="['/recipe-list',weekId, day.dayId]" >
@@ -23,7 +26,7 @@
             </a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" (click)="next()" >Siguiente</a>
           </li>
         </ul>
       </nav>

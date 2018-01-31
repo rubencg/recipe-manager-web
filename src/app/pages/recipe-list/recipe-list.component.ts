@@ -4,7 +4,7 @@ import { Week, FoodTime, Utils, WeekRecipe } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { Recipe, RecipeService } from '../../services/recipe.service';
 import { WeekDay } from '@angular/common/src/i18n/locale_data_api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -26,11 +26,11 @@ export class RecipeListComponent implements OnInit {
     {name: "Sabado", dayId: 6},
     {name: "Domingo", dayId: 7}
   ];
-  activeDay: number = 1;
+  activeDay: number = -1;
   weekId: string;
   
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService,
-    private route: ActivatedRoute ) { 
+    private route: ActivatedRoute, private router: Router ) { 
   }
 
   ngOnInit() {
@@ -41,10 +41,32 @@ export class RecipeListComponent implements OnInit {
       this.weeks = weeks;
       this.route.params.subscribe(params => {
         this.weekId = params['weekId'];      
-        this.activeDay = +params['dayId'];
+        if(+params['dayId']){
+          this.activeDay = +params['dayId'];
+        }
         this.filter();
      });
     });
+  }
+
+  next(){
+    let url: string = 'recipe-list/'+ this.weekId + '/';
+    if(this.activeDay + 1 > 7){
+      url += 1;
+    }else{
+      url += (this.activeDay + 1);
+    }
+    this.router.navigateByUrl(url);
+  }
+
+  previous(){
+    let url: string = 'recipe-list/'+ this.weekId + '/';
+    if(this.activeDay - 1 < 1){
+      url += 7;
+    }else{
+      url += (this.activeDay - 1);
+    }
+    this.router.navigateByUrl(url);
   }
 
   filter(){
