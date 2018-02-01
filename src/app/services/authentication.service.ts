@@ -10,10 +10,12 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
 
   authState: any = null;
+  userId: string;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) {
     this.authState = this.afAuth.authState
     .switchMap(user => {
+      this.userId = this.afAuth.auth.currentUser.uid;
       if (user) {
         return Observable.of(user);
       } else {

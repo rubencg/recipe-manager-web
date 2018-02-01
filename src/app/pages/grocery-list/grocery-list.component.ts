@@ -4,6 +4,7 @@ import { RecipeService, Recipe, Ingredient, IngredientGroup, GroceryGroup } from
 import { Week, Utils, FoodGroup } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
+import { GroceryService } from '../../services/grocery.service';
 
 @Component({
   selector: 'app-grocery-list',
@@ -19,7 +20,7 @@ export class GroceryListComponent implements OnInit {
   week: Week;
 
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private groceryService: GroceryService) { }
 
   ngOnInit() {
     this.recipeService.getAllRecipes().subscribe((recipes: any[]) => {
@@ -95,8 +96,7 @@ export class GroceryListComponent implements OnInit {
       groups: this.groups
     };
 
-    console.log(g);
-    
+    this.groceryService.save(g);
   }
 
 }

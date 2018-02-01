@@ -48,6 +48,7 @@ export interface Ingredient{
 }
 
 export interface GroceryGroup{
+  key?: string;
   weekId: string;
   groups: IngredientGroup[];
 }
