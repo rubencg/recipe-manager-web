@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe, RecipeService } from '../../services/recipe.service';
-import { FoodTime, Week, Utils } from '../../models/interfaces';
+import { FoodTime, Week, Utils, Group } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { WeekRecipeService } from '../../services/week-recipe.service';
 
@@ -15,11 +15,13 @@ export class RecipesOverviewComponent implements OnInit {
   filteredRecipes: Recipe[]= [];
   timeTitle = "Hora del Dia";
   weekTitle = "Semana";
-  filterText = "";
+  groupTitle = "Grupo";
+  // filterText = "";
 
   //Filters
   foodTime: FoodTime = -1;
   weekName: string = "";
+  groupId: Group = -1;
 
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService) { }
 
@@ -34,9 +36,11 @@ export class RecipesOverviewComponent implements OnInit {
 
   }
 
-  search(){
-    this.filter();
-  }
+  // search(){
+  //   if(this.filterText.length > 3){
+  //     this.filter();
+  //   }
+  // }
 
   selectWeek(name: string){
     if(name){
@@ -52,6 +56,7 @@ export class RecipesOverviewComponent implements OnInit {
 
   filter(){
     this.timeTitle = Utils.getFoodTimeName(this.foodTime);
+    this.groupTitle = Utils.getGroupName(this.groupId);
     
     this.filteredRecipes = this.recipes;
 
@@ -64,15 +69,26 @@ export class RecipesOverviewComponent implements OnInit {
       this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => _.includes(_.map(week.recipes, 'RecipeId'), r.key) );
     }
 
-    if(this.filterText){
-      this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.name.toLowerCase().includes(this.filterText.toLowerCase()));
+    if(this.groupId != -1){
+      this.filteredRecipes = _.filter(this.recipes, (r: Recipe) => r.group == this.groupId);
     }
+
+    // if(this.filterText.length > 3){
+    //   this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.name.toLowerCase().includes(this.filterText.toLowerCase()));
+    // }
   }
 
   selectTime(foodTime: FoodTime){
     this.foodTime = foodTime;
 
     this.filter();
-    this.filterText = "";
+    // this.filterText = "";
+  }
+
+  selectGroup(groupId: Group){
+    this.groupId = groupId;
+
+    this.filter();
+    // this.filterText = "";
   }
 }

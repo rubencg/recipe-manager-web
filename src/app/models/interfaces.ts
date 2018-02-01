@@ -29,10 +29,10 @@ export enum FoodGroup {
 }
 
 export enum Group {
-    A,
-    B,
-    C,
-    D
+    A = 1,
+    B = 2,
+    C = 3,
+    D = 4
 }
 
 export enum Difficulty {
@@ -56,6 +56,21 @@ export interface WeekRecipe {
 }
 
 export class Utils {
+    public static getGroupName(id: Group) {
+        switch (id) {
+            case Group.A:
+                return "Grupo A";
+            case Group.B:
+                return "Grupo B";
+            case Group.C:
+                return "Grupo C";
+            case Group.D:
+                return "Grupo D";
+            default:
+                return "Grupo";
+        }
+    }
+
     public static getFoodTimeName(id: FoodTime) {
         switch (id) {
             case FoodTime.Breakfast:
