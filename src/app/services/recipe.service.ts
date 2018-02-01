@@ -47,7 +47,7 @@ export interface Ingredient{
   foodGroup: FoodGroup;
 }
 
-export interface GroceryGroup{
+export interface GroceryList{
   key?: string;
   weekId: string;
   groups: IngredientGroup[];
@@ -59,7 +59,6 @@ export interface IngredientGroup{
   ingredients?: GroceryIngredient[];
   groupImage?: string;
   total: number;
-  currentFinished: number;
 }
 
 export interface GroceryIngredient{

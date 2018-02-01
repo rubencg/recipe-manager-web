@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { GroceryGroup } from './recipe.service';
+import { GroceryList } from './recipe.service';
 import { AuthenticationService } from './authentication.service';
 import * as _ from 'lodash';
 
@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 export class GroceryService {
   userId: string;
   groceryRefRef: Observable<any[]>;
-  groceries: GroceryGroup[];
+  groceries: GroceryList[];
 
   constructor(private db: AngularFireDatabase, private authService: AuthenticationService) { 
     this.groceryRefRef = db.list('users/' + this.authService.userId +'/groceryLists').snapshotChanges().map(changes => {
@@ -24,21 +24,21 @@ export class GroceryService {
     return this.groceryRefRef;
   }
 
-  save(groceryGroup: GroceryGroup){
-    let g: GroceryGroup = _.first(_.filter(this.groceries, (gg: GroceryGroup) => gg.weekId == groceryGroup.weekId ));
+  save(groceryList: GroceryList){
+    let g: GroceryList = _.first(_.filter(this.groceries, (gg: GroceryList) => gg.weekId == groceryList.weekId ));
     
     if(g){
       this.delete(g);
     }
-    this.db.list('users/' + this.authService.userId +'/groceryLists').push(groceryGroup);
+    this.db.list('users/' + this.authService.userId +'/groceryLists').push(groceryList);
   }
 
-  delete(groceryGroup: GroceryGroup){
-    this.db.list('users/' + this.authService.userId +'/groceryLists').remove(groceryGroup.key);
+  delete(groceryList: GroceryList){
+    this.db.list('users/' + this.authService.userId +'/groceryLists').remove(groceryList.key);
   }
 
-  update(groceryGroup: GroceryGroup){
-    this.db.list('users/' + this.authService.userId +'/groceryLists').update(groceryGroup.key, groceryGroup);
+  update(groceryList: GroceryList){
+    this.db.list('users/' + this.authService.userId +'/groceryLists').update(groceryList.key, groceryList);
   }
 
 }
