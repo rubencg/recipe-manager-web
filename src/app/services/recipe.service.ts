@@ -47,12 +47,25 @@ export interface Ingredient{
   foodGroup: FoodGroup;
 }
 
+export interface GroceryGroup{
+  weekId: string;
+  groups: IngredientGroup[];
+}
+
 export interface IngredientGroup{
   name: string;
   foodGroup: FoodGroup;
-  ingredients?: Ingredient[];
+  ingredients?: GroceryIngredient[];
   groupImage?: string;
   total: number;
-  totalLeft: number;
-  weekId: string;
+  currentFinished: number;
+}
+
+export interface GroceryIngredient{
+  name: string;
+  quantity: number;
+  unit: Unit;
+  unitName: string;
+  isFinished: boolean;
+  foodGroup: FoodGroup;
 }

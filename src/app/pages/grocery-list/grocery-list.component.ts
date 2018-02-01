@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeekRecipeService } from '../../services/week-recipe.service';
-import { RecipeService, Recipe, Ingredient, IngredientGroup } from '../../services/recipe.service';
+import { RecipeService, Recipe, Ingredient, IngredientGroup, GroceryGroup } from '../../services/recipe.service';
 import { Week, Utils, FoodGroup } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +16,7 @@ export class GroceryListComponent implements OnInit {
   filteredRecipes: Recipe[]= [];
   weekTitle = "Semana";
   groups: IngredientGroup[];
+  week: Week;
 
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService,
     private route: ActivatedRoute) { }
@@ -35,11 +36,10 @@ export class GroceryListComponent implements OnInit {
   }
 
   selectWeek(key: string){
-    let week: Week;
     if(key){
-      week = _.first(_.filter(this.weeks, (w: Week) => w.key == key));
-      this.weekTitle = "Semana " + week.name;
-      this.filter(week);
+      this.week = _.first(_.filter(this.weeks, (w: Week) => w.key == key));
+      this.weekTitle = "Semana " + this.week.name;
+      this.filter(this.week);
     }else{
       this.weekTitle = "Semana";
       this.filteredRecipes = null;
@@ -67,15 +67,35 @@ export class GroceryListComponent implements OnInit {
         name: Utils.getFoodGroupName(+key),
         foodGroup: +key,
         groupImage: "",
-        ingredients: i,
         total: i.length,
-        totalLeft: i.length,
-        weekId: week.key
+        currentFinished: 0,
+        ingredients: []
       };
+
+      i.forEach(ing => {
+        g.ingredients.push({
+          isFinished: false,
+          name: ing.name,
+          quantity: ing.quantity,
+          unit: ing.unit,
+          unitName: Utils.getUnitName(ing.unit),
+          foodGroup: key
+        });
+      });
       
       return g;
     })
     .value();
+    
+  }
+
+  createGroceryList(){
+    let g: GroceryGroup = {
+      weekId: this.week.key,
+      groups: this.groups
+    };
+
+    console.log(g);
     
   }
 
