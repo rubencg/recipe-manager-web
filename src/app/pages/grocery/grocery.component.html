@@ -1,13 +1,13 @@
 <div class="header-container">
-    <span>Frutas {{id}}</span>
+    <span>{{ groupTitle }}</span>
 </div>
 <div class="grocery-container">
     <div class="d-flex flex-wrap">
-        <div class="card grocery-card" [routerLink]="['/grocery-list',1]" *ngFor="let element of elements">
+        <div class="card grocery-card" *ngFor="let i of ingredients">
             <div class="card-body form-check ">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" value="">
-                    <span class="grocery-number">{{element.quantity}}</span> {{element.name}}
+                    <span class="grocery-number">{{i.quantity}} {{ getUnitName(i.unit) }}</span> {{i.name}} 
                 </label>
             </div>
         </div>

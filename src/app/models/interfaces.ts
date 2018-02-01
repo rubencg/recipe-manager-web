@@ -89,4 +89,8 @@ export class Utils {
                 return "Verduras";
         }
     }
+
+    public static getUnitName(id: Unit) {
+        return Unit[id];
+    }
 }

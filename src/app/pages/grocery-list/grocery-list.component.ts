@@ -16,15 +16,6 @@ export class GroceryListComponent implements OnInit {
   weekTitle = "Semana";
   groups: IngredientGroup[];
 
-  groceryGroup: any[] = [
-    { id: 1, name: "Frutas", quantityNeeded: 4, quantityBought: 2 },
-    { id: 2, name: "Verduras", quantityNeeded: 8, quantityBought: 5 },
-    { id: 3, name: "Lacteos", quantityNeeded: 6, quantityBought: 8 },
-    { id: 4, name: "Carnes", quantityNeeded: 43, quantityBought: 43 },
-    { id: 5, name: "Especias", quantityNeeded: 5, quantityBought: 3 },
-    { id: 6, name: "Otros", quantityNeeded: 14, quantityBought: 13 },
-  ];
-
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService) { }
 
   ngOnInit() {
