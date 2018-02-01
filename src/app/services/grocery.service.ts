@@ -37,6 +37,10 @@ export class GroceryService {
     this.db.list('users/' + this.authService.userId +'/groceryLists').remove(groceryGroup.key);
   }
 
+  update(groceryGroup: GroceryGroup){
+    this.db.list('users/' + this.authService.userId +'/groceryLists').update(groceryGroup.key, groceryGroup);
+  }
+
 }
 
 

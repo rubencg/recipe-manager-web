@@ -1,3 +1,6 @@
+<div *ngIf="!groupTitle" class="row justify-content-md-center">
+    Cargando...
+</div>
 <div class="header-container">
     <span>{{ groupTitle }}</span>
 </div>
@@ -6,8 +9,8 @@
         <div class="card grocery-card" *ngFor="let i of ingredients">
             <div class="card-body form-check ">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="">
-                    <span class="grocery-number">{{i.quantity}} {{ getUnitName(i.unit) }}</span> {{i.name}} 
+                    <input class="form-check-input" type="checkbox" [checked]="i.isFinished" (change)="save(i)">
+                    <span class="grocery-number">{{i.quantity}} {{ i.unitName }}</span> {{i.name}}
                 </label>
             </div>
         </div>
