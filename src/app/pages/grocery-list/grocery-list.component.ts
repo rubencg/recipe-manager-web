@@ -3,6 +3,7 @@ import { WeekRecipeService } from '../../services/week-recipe.service';
 import { RecipeService, Recipe, Ingredient, IngredientGroup } from '../../services/recipe.service';
 import { Week, Utils, FoodGroup } from '../../models/interfaces';
 import * as _ from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grocery-list',
@@ -16,15 +17,20 @@ export class GroceryListComponent implements OnInit {
   weekTitle = "Semana";
   groups: IngredientGroup[];
 
-  constructor(private recipeService: RecipeService, private weekService: WeekRecipeService) { }
+  constructor(private recipeService: RecipeService, private weekService: WeekRecipeService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.recipeService.getAllRecipes().subscribe((recipes: any[]) => {
       this.recipes = recipes;
       this.filteredRecipes = recipes;
     });
+
     this.weekService.getAllWeeks().subscribe((weeks: Week[]) => {
       this.weeks = weeks;
+      this.route.params.subscribe(params => {      
+        this.selectWeek(params['weekId']);
+     });
     });
   }
 

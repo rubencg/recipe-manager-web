@@ -10,8 +10,8 @@
             {{ weekTitle }}
           </button>
           <div class="dropdown-menu">
-            <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" (click)="selectWeek(null)">Borrar</a>
-            <a *ngFor="let week of weeks" class="dropdown-item" (click)="selectWeek(week.key)">Semana {{ week.name }}</a>
+            <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" [routerLink]="['/grocery-list']">Borrar</a>
+            <a *ngFor="let week of weeks" class="dropdown-item" [routerLink]="['/grocery-list', week.key]" >Semana {{ week.name }}</a>
           </div>
         </div>
       </div>

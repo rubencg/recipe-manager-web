@@ -23,6 +23,7 @@ const routes: Routes = [
   },
   { path: 'recipe/:id', component: RecipeComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list', component: GroceryListComponent, canActivate: [AuthGuard] },
+  { path: 'grocery-list/:weekId', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list/:weekId/:foodGroupId', component: GroceryComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   // otherwise redirect to recipe-list
