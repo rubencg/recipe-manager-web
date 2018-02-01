@@ -72,4 +72,21 @@ export class Utils {
                 return "Hora del Dia";
         }
     }
+
+    public static getFoodGroupName(id: FoodGroup) {
+        switch (id) {
+            case FoodGroup.Dairy:
+                return "Lacteos";
+            case FoodGroup.Fruit:
+                return "Frutas";
+            case FoodGroup.Grains:
+                return "Cereales";
+            case FoodGroup.Others:
+                return "Otros";
+            case FoodGroup.Proteins:
+                return "Proteinas";
+            case FoodGroup.Vegetable:
+                return "Verduras";
+        }
+    }
 }

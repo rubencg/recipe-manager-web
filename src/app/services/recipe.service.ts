@@ -44,5 +44,15 @@ export interface Ingredient{
   name: string;
   quantity: number;
   unit: Unit;
-  foodGroup?: FoodGroup;
+  foodGroup: FoodGroup;
+}
+
+export interface IngredientGroup{
+  name: string;
+  foodGroup: FoodGroup;
+  ingredients?: Ingredient[];
+  groupImage?: string;
+  total: number;
+  totalLeft: number;
+  weekId: string;
 }
