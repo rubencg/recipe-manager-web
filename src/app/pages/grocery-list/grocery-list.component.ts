@@ -84,20 +84,29 @@ export class GroceryListComponent implements OnInit {
           name: Utils.getFoodGroupName(+key),
           foodGroup: +key,
           groupImage: "",
-          total: i.length,
+          total: 0,
           ingredients: []
         };
 
-        i.forEach(ing => {
-          g.ingredients.push({
-            isFinished: false,
-            name: ing.name,
-            quantity: ing.quantity,
-            unit: ing.unit,
-            unitName: Utils.getUnitName(ing.unit),
-            foodGroup: key
-          });
-        });
+        let grupedIngs: GroceryIngredient[] = _.chain(i)
+          .groupBy((gg: Ingredient) => gg.name)
+          .map((i: Ingredient[], key: string) => {
+            let gIng: GroceryIngredient;
+            gIng = {
+              name: key,
+              foodGroup: i[0].foodGroup,
+              isFinished: false,
+              quantity: _.sumBy(i, (ii: Ingredient) => ii.quantity),
+              unit: i[0].unit,
+              unitName: Utils.getUnitName(i[0].unit)
+            };
+
+            return gIng;
+          })
+          .value();
+
+        g.ingredients = grupedIngs;
+        g.total = grupedIngs.length;
 
         return g;
       })
@@ -106,8 +115,7 @@ export class GroceryListComponent implements OnInit {
 
   deleteGroceryList() {
     if (this.groceryList) {
-      console.log(this.groceryList);
-      
+
       this.groceryService.delete(this.groceryList);
       this.groceryList = null;
       this.groups = null;

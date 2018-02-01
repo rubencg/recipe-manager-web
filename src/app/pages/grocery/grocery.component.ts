@@ -26,13 +26,13 @@ export class GroceryComponent implements OnInit {
         this.foodGroup = +params['foodGroupId'];
 
         this.groceryList = _.first(_.filter(groceryLists, (g: GroceryList) => g.weekId == params['weekId']));
-        this.group = _.first(_.filter(this.groceryList.groups, (g: IngredientGroup) => g.foodGroup == this.foodGroup));
+        if(this.groceryList){
+          this.group = _.first(_.filter(this.groceryList.groups, (g: IngredientGroup) => g.foodGroup == this.foodGroup));
+        }
+        
         
         this.groupTitle = Utils.getFoodGroupName(this.foodGroup);
         this.ingredients = this.group.ingredients;
-
-        console.log(this.groceryList);
-        
       });
     });
   }
