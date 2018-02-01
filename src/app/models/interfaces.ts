@@ -60,22 +60,16 @@ export class Utils {
         switch (id) {
             case FoodTime.Breakfast:
                 return "Desayuno";
-                break;
             case FoodTime.AMSnack:
                 return "A.M. Snack";
-                break;
             case FoodTime.Lunch:
                 return "Comida";
-                break;
             case FoodTime.PMSnack:
                 return "P.M. Snack";
-                break;
             case FoodTime.Dinner:
                 return "Cena";
-                break;
             default:
                 return "Hora del Dia";
-                break;
         }
     }
 }

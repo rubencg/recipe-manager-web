@@ -2,7 +2,7 @@
   <div *ngIf="!this.weeks" class="row justify-content-md-center">
     Cargando...
   </div>
-  <div *ngIf="this.weeks" class="row justify-content-md-center">
+  <div *ngIf="this.weeks" class="row">
     <div class="col-2">
       <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -10,11 +10,11 @@
         </button>
         <div class="dropdown-menu">
           <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" (click)="selectWeek(null)">Borrar</a>
-          <a *ngFor="let week of weeks" class="dropdown-item" [routerLink]="['/recipe-list',week.key, activeDay]" >Semana {{ week.name }}</a>
+          <a *ngFor="let week of weeks" class="dropdown-item" [routerLink]="['/recipe-list',week.key, activeDay < 0 ? 1 : activeDay]" >Semana {{ week.name }}</a>
         </div>
       </div>
     </div>
-    <div class="col-10 mx-auto">
+    <div *ngIf="weekId" class="col-10 mx-auto">
       <nav aria-label="Page navigation example pagination-container">
         <ul class="pagination">
           <li class="page-item">
