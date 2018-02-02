@@ -61,7 +61,7 @@ export class RecipesOverviewComponent implements OnInit {
     this.filteredRecipes = this.recipes;
 
     if(this.foodTime != -1){
-      this.filteredRecipes = _.filter(this.recipes, (r: Recipe) => r.foodTime == this.foodTime);
+      this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.foodTime == this.foodTime);
     }
 
     if(this.weekName){
@@ -70,7 +70,7 @@ export class RecipesOverviewComponent implements OnInit {
     }
 
     if(this.groupId != -1){
-      this.filteredRecipes = _.filter(this.recipes, (r: Recipe) => r.group == this.groupId);
+      this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.group == this.groupId);
     }
 
     // if(this.filterText.length > 3){
