@@ -24,7 +24,7 @@
       </div>
       <div class="col-sm-8">
         <h4>Preparacion:</h4>
-        <p>{{recipe.instructions}}</p>
+        <p *ngFor="let i of recipe.instructions.split('\n\n')" >{{i}}</p>
       </div>
     </div>
   </div>

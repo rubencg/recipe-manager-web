@@ -12,7 +12,7 @@ import { Unit, Utils } from '../../models/interfaces';
 export class RecipeComponent implements OnInit {
   id: string;
   recipe: Recipe;
-  
+
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class RecipeComponent implements OnInit {
       this.recipeService.getAllRecipes().subscribe(recipes => {
         this.recipe = _.first(_.filter(recipes, r => r.key == this.id));
       });
-      
+
    });
   }
 
