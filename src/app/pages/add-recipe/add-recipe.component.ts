@@ -49,7 +49,7 @@ export class AddRecipeComponent implements OnInit {
       let ingredients: string[] = this.ingredients.split(/\r?\n/);
       ingredients.forEach(ingredient => {
         let elements: string[] = ingredient.split(',');
-        
+
         let i: Ingredient = {
           name: elements[0],
           quantity: +elements[1],
@@ -58,7 +58,7 @@ export class AddRecipeComponent implements OnInit {
         };
         recipe.ingredients.push(i);
       });
-      
+
       this.recipeService.save(recipe).then( (r: Recipe) => {
         let week: Week;
         let update: boolean = true;
@@ -85,7 +85,7 @@ export class AddRecipeComponent implements OnInit {
         }
 
         this.clear();
-      }); 
+      });
     }catch(err){
       alert(err);
     }
@@ -94,14 +94,11 @@ export class AddRecipeComponent implements OnInit {
   clear(){
     this.name = "";
     this.instructions = "";
-    this.group = 1;
-    this.foodTime = 1;
     this.ingredients = "";
-    this.difficulty = 1;
     this.serves = 1;
     this.cookTime = null;
     this.prepTime = null;
-  
+
   }
 
   getUnit(s: string): Unit{
