@@ -1,7 +1,7 @@
 import { Component, OnInit, group } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WeekRecipeService } from '../../services/week-recipe.service';
-import { Week, FoodGroup, Utils, WeekRecipe } from '../../models/interfaces';
+import { Week, FoodGroup, Utils, WeekRecipe, Unit } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { RecipeService, Recipe, IngredientGroup, Ingredient, GroceryIngredient, GroceryList } from '../../services/recipe.service';
 import { GroceryService } from '../../services/grocery.service';
@@ -54,5 +54,39 @@ export class GroceryComponent implements OnInit {
     }
 
     this.groceryService.update(this.groceryList);
+  }
+
+  convertIngToOz(ingredient: GroceryIngredient){
+    if(ingredient.unit == Unit.gr){
+      ingredient.unit = Unit.oz;
+      ingredient.unitName = Utils.getUnitName(Unit.oz);
+      ingredient.quantity = ingredient.quantity * 0.035274;
+    }
+  }
+
+  convertIngToGr(ingredient: GroceryIngredient){
+    if(ingredient.unit == Unit.oz){
+      ingredient.unit = Unit.gr;
+      ingredient.unitName = Utils.getUnitName(Unit.gr);
+      ingredient.quantity = ingredient.quantity / 0.035274;
+    }
+  }
+
+  convertToOz(){
+    this.finishedIngredients.forEach((ingredient: GroceryIngredient) => {
+      this.convertIngToOz(ingredient);
+    });
+    this.ingredients.forEach((ingredient: GroceryIngredient) => {
+      this.convertIngToOz(ingredient);
+    });
+  }
+
+  convertToGr(){
+    this.ingredients.forEach((ingredient: GroceryIngredient) => {
+      this.convertIngToGr(ingredient);
+    });
+    this.finishedIngredients.forEach((ingredient: GroceryIngredient) => {
+      this.convertIngToGr(ingredient);
+    });
   }
 }

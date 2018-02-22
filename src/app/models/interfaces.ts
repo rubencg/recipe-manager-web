@@ -8,7 +8,8 @@ export enum Unit {
     tbsp,
     hf,
     shf,
-    lb
+    lb,
+    gr
 }
 
 export enum FoodTime {

@@ -1,9 +1,13 @@
 <div *ngIf="!groupTitle" class="row justify-content-md-center">
   Cargando...
 </div>
-<div class="header-container">
+<div *ngIf="groupTitle" class="header-container">
   <span>{{ groupTitle }}</span>
   <span> ( {{finishedIngredients.length}} / {{ingredients.length + finishedIngredients.length}} )</span>
+  <div class="btn-group right" role="group" aria-label="Basic example">
+    <button type="button" (click)="convertToOz()" class="btn btn-secondary">Oz</button>
+    <button type="button" (click)="convertToGr()" class="btn btn-secondary">Gr</button>
+  </div>
 </div>
 <div class="grocery-container">
   <div class="d-flex flex-wrap">
@@ -11,7 +15,7 @@
       <div class="card-body form-check ">
         <label class="form-check-label">
           <input class="form-check-input" type="checkbox" [checked]="i.isFinished" (change)="save(i)">
-          <span class="grocery-number">{{i.quantity}} {{ i.unitName }}</span> {{i.name}}
+          <span class="grocery-number">{{i.quantity | number:'1.0-2'}} {{ i.unitName }}</span> {{i.name}}
         </label>
       </div>
     </div>
@@ -28,7 +32,7 @@
         <div class="card-body form-check ">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" [checked]="i.isFinished" (change)="save(i)">
-            <span class="grocery-number finished">{{i.quantity}} {{ i.unitName }}</span> <span class="finished">{{i.name}}</span>
+            <span class="grocery-number finished">{{i.quantity | number:'1.0-2'}} {{ i.unitName }}</span> <span class="finished">{{i.name}}</span>
           </label>
         </div>
       </div>
