@@ -10,6 +10,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipesOverviewComponent } from './recipes-overview/recipes-overview.component';
 import { FormsModule } from '@angular/forms';
+import { UserOptionsComponent } from './user-options/user-options.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     FormsModule
   ],
-  declarations: [RecipeListComponent, LoginComponent, GroceryListComponent, RecipeComponent, GroceryComponent, RecipesComponent, AddRecipeComponent, RecipesOverviewComponent]
+  declarations: [RecipeListComponent, LoginComponent, GroceryListComponent, RecipeComponent, GroceryComponent, RecipesComponent, AddRecipeComponent, RecipesOverviewComponent, UserOptionsComponent]
 })
 export class PagesModule { }

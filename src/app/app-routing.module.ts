@@ -9,6 +9,7 @@ import { GroceryComponent } from './pages/grocery/grocery.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { RecipesOverviewComponent } from './pages/recipes-overview/recipes-overview.component';
 import { AddRecipeComponent } from './pages/add-recipe/add-recipe.component';
+import { UserOptionsComponent } from './pages/user-options/user-options.component';
 
 const routes: Routes = [
   { path: 'recipe-list/:weekId/:dayId', component: RecipeListComponent, canActivate: [AuthGuard] },
@@ -19,13 +20,14 @@ const routes: Routes = [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: RecipesOverviewComponent },
       { path: 'add', component: AddRecipeComponent }
-    ] 
+    ]
   },
   { path: 'recipe/:id', component: RecipeComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list/:weekId', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list/:weekId/:foodGroupId', component: GroceryComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'user-options', component: UserOptionsComponent, canActivate: [AuthGuard]}
   // otherwise redirect to recipe-list
   { path: '**', redirectTo: 'recipe-list' }
 ];

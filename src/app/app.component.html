@@ -27,7 +27,7 @@
           Perfil
         </a>
         <div class="dropdown-menu" aria-labelledby="profileDropdownMenuLink">
-          <a class="dropdown-item" href="#">Mis opciones</a>
+          <a class="dropdown-item" [routerLink]="['user-options']">Mis opciones</a>
           <a class="dropdown-item pointer" (click)="logout()" >Cerrar Sesion</a>
         </div>
       </li>
