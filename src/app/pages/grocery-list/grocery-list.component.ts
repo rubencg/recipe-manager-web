@@ -5,6 +5,7 @@ import { Week, Utils, FoodGroup } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { GroceryService } from '../../services/grocery.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-grocery-list',
@@ -21,7 +22,7 @@ export class GroceryListComponent implements OnInit {
   week: Week;
 
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService,
-    private route: ActivatedRoute, private groceryService: GroceryService) { }
+    private route: ActivatedRoute, private groceryService: GroceryService, private userService: UserService) { }
 
   ngOnInit() {
     this.recipeService.getAllRecipes().subscribe((recipes: any[]) => {
@@ -73,7 +74,9 @@ export class GroceryListComponent implements OnInit {
     let ingredients: Ingredient[] = [];
     ingredientsArray.forEach(ings => {
       ings.forEach((ing: Ingredient) => {
-        ingredients.push(ing);
+        let copy:Ingredient = JSON.parse(JSON.stringify(ing))
+        copy.quantity = this.userService.getUsersQty() * copy.quantity;
+        ingredients.push(copy);
       });
     });
 
