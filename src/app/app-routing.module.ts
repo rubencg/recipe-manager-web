@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'grocery-list/:weekId', component: GroceryListComponent, canActivate: [AuthGuard] },
   { path: 'grocery-list/:weekId/:foodGroupId', component: GroceryComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'user-options', component: UserOptionsComponent, canActivate: [AuthGuard]}
+  { path: 'user-options', component: UserOptionsComponent, canActivate: [AuthGuard]},
   // otherwise redirect to recipe-list
   { path: '**', redirectTo: 'recipe-list' }
 ];
