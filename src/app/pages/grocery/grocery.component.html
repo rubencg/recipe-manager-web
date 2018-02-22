@@ -1,18 +1,37 @@
 <div *ngIf="!groupTitle" class="row justify-content-md-center">
-    Cargando...
+  Cargando...
 </div>
 <div class="header-container">
-    <span>{{ groupTitle }}</span>
+  <span>{{ groupTitle }}</span>
+  <span> ( {{finishedIngredients.length}} / {{ingredients.length + finishedIngredients.length}} )</span>
 </div>
 <div class="grocery-container">
-    <div class="d-flex flex-wrap">
-        <div class="card grocery-card" *ngFor="let i of ingredients">
-            <div class="card-body form-check ">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" [checked]="i.isFinished" (change)="save(i)">
-                    <span class="grocery-number">{{i.quantity}} {{ i.unitName }}</span> {{i.name}}
-                </label>
-            </div>
-        </div>
+  <div class="d-flex flex-wrap">
+    <div class="card grocery-card" *ngFor="let i of ingredients">
+      <div class="card-body form-check ">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" [checked]="i.isFinished" (change)="save(i)">
+          <span class="grocery-number">{{i.quantity}} {{ i.unitName }}</span> {{i.name}}
+        </label>
+      </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="finishedIngredients.length > 0">
+  <div class="header-container">
+    <span>Finished</span>
+  </div>
+  <div class="grocery-container">
+    <div class="d-flex flex-wrap">
+      <div class="card grocery-card" *ngFor="let i of finishedIngredients">
+        <div class="card-body form-check ">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" [checked]="i.isFinished" (change)="save(i)">
+            <span class="grocery-number finished">{{i.quantity}} {{ i.unitName }}</span> <span class="finished">{{i.name}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

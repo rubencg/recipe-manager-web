@@ -15,6 +15,7 @@ export class GroceryComponent implements OnInit {
   foodGroup: FoodGroup;
   groupTitle: string;
   ingredients: GroceryIngredient[];
+  finishedIngredients: GroceryIngredient[] = [];
   groceryList: GroceryList;
   group: IngredientGroup;
 
@@ -29,10 +30,11 @@ export class GroceryComponent implements OnInit {
         if(this.groceryList){
           this.group = _.first(_.filter(this.groceryList.groups, (g: IngredientGroup) => g.foodGroup == this.foodGroup));
         }
-        
-        
+
+
         this.groupTitle = Utils.getFoodGroupName(this.foodGroup);
-        this.ingredients = this.group.ingredients;
+        this.ingredients = _.filter(this.group.ingredients, (i: GroceryIngredient) => !i.isFinished);
+        this.finishedIngredients = _.filter(this.group.ingredients, (i: GroceryIngredient) => i.isFinished);
       });
     });
   }
@@ -43,6 +45,13 @@ export class GroceryComponent implements OnInit {
 
   save(ingredient: GroceryIngredient){
     ingredient.isFinished = !ingredient.isFinished;
+    if(ingredient.isFinished){
+      this.finishedIngredients.push(ingredient);
+      _.remove(this.ingredients, (i: GroceryIngredient) => i.name == ingredient.name);
+    }else{
+      this.ingredients.push(ingredient);
+      _.remove(this.finishedIngredients, (i: GroceryIngredient) => i.name == ingredient.name);
+    }
 
     this.groceryService.update(this.groceryList);
   }
