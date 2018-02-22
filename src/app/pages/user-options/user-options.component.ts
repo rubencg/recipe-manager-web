@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-options',
@@ -7,22 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserOptionsComponent implements OnInit {
   usersQty: number;
-  constructor() {
+
+  constructor(private userService: UserService) {
 
   }
 
   ngOnInit() {
-    let usersQty = localStorage.getItem('usersQty');
-    if(usersQty){
-      this.usersQty = +usersQty;
-    }else{
-      this.usersQty = 1;
-      localStorage.setItem('usersQty', '1');
-    }
+    this.usersQty = this.userService.getUsersQty();
   }
 
   save(){
-    localStorage.setItem('usersQty', this.usersQty.toString());
+    this.userService.setUsersQty(this.usersQty);
   }
 
 }

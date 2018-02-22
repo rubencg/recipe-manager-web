@@ -14,6 +14,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RecipeService } from './services/recipe.service';
 import { WeekRecipeService } from './services/week-recipe.service';
 import { GroceryService } from './services/grocery.service';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { GroceryService } from './services/grocery.service';
     AngularFireModule.initializeApp(environment.firebase),
     PagesModule
   ],
-  providers: [ AuthenticationService, AngularFireAuth, AuthGuard, RecipeService, AngularFireDatabase, WeekRecipeService, GroceryService ],
+  providers: [ AuthenticationService, AngularFireAuth, AuthGuard, RecipeService, AngularFireDatabase, WeekRecipeService, GroceryService, UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
