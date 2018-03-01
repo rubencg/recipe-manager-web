@@ -40,7 +40,8 @@ export class AuthenticationService {
 
   // Cambiar para que vaya a base de datos y cheque por los correos autorizados
   isAuthorized(email: string): boolean{
-    return email == "rubencg88@gmail.com" || email == "sarahimirelesr@gmail.com" || email == "rcardenas@tacitknowledge.com";
+    return email == "rubencg88@gmail.com" || email == "sarahimirelesr@gmail.com" || email == "rcardenas@tacitknowledge.com"
+      || email == "andrescg_90@hotmail.com";
   }
 
   loginWithGoogle() {
