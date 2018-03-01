@@ -15,8 +15,8 @@ export class AuthenticationService {
   constructor(private afAuth: AngularFireAuth, private router: Router) {
     this.authState = this.afAuth.authState
     .switchMap(user => {
-      this.userId = this.afAuth.auth.currentUser.uid;
       if (user) {
+        this.userId = this.afAuth.auth.currentUser.uid;
         return Observable.of(user);
       } else {
         return Observable.of(null)
