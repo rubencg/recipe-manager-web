@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeekRecipeService } from '../../services/week-recipe.service';
-import { Week, FoodTime, Utils, WeekRecipe } from '../../models/interfaces';
+import { Week, FoodTime, Utils, WeekRecipe, Group } from '../../models/interfaces';
 import * as _ from 'lodash';
 import { Recipe, RecipeService } from '../../services/recipe.service';
 import { WeekDay } from '@angular/common/src/i18n/locale_data_api';
@@ -27,10 +27,11 @@ export class RecipeListComponent implements OnInit {
     {name: "Domingo", dayId: 7}
   ];
   activeDay: number = -1;
+  group: string;
   weekId: string;
-  
+
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService,
-    private route: ActivatedRoute, private router: Router ) { 
+    private route: ActivatedRoute, private router: Router ) {
   }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class RecipeListComponent implements OnInit {
     this.weekService.getAllWeeks().subscribe((weeks: Week[]) => {
       this.weeks = weeks;
       this.route.params.subscribe(params => {
-        this.weekId = params['weekId'];      
+        this.weekId = params['weekId'];
         if(+params['dayId']){
           this.activeDay = +params['dayId'];
         }
@@ -72,9 +73,11 @@ export class RecipeListComponent implements OnInit {
   filter(){
     if(this.weekId){
       let week: Week = _.first(_.filter(this.weeks, (w: Week) => w.key == this.weekId));
+      this.weekTitle = "Semana " + week.name;
       if(week){
         let weekRecipes = _.filter(week.recipes, (r: WeekRecipe) => r.DayOrderId == this.activeDay);
         this.filteredRecipes = _.filter(this.recipes, (r: Recipe) => _.includes(_.map(weekRecipes, 'RecipeId'), r.key) );
+        this.group = Utils.getGroupName(+this.filteredRecipes[0].group);
       }
     }else{
       this.filteredRecipes = [];

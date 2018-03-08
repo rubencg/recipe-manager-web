@@ -12,6 +12,9 @@ import { Unit, Utils } from '../../models/interfaces';
 export class RecipeComponent implements OnInit {
   id: string;
   recipe: Recipe;
+  group: string;
+  time: string;
+  filteredRecipes: Recipe[];
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
@@ -21,6 +24,9 @@ export class RecipeComponent implements OnInit {
 
       this.recipeService.getAllRecipes().subscribe(recipes => {
         this.recipe = _.first(_.filter(recipes, r => r.key == this.id));
+        this.group = Utils.getGroupName(+this.recipe.group);
+        this.time = Utils.getFoodTimeName(+this.recipe.foodTime);
+        this.filteredRecipes = _.filter(recipes, r => r.isFavorite && r.group == this.recipe.group && r.key != this.recipe.key);
       });
 
    });
@@ -30,4 +36,12 @@ export class RecipeComponent implements OnInit {
     return Utils.getUnitName(unitId);
   }
 
+  getGroupName(group){
+    return Utils.getGroupName(+group);
+  }
+
+  toggleFavorite(){
+    this.recipe.isFavorite = this.recipe.isFavorite ? false : true;
+    this.recipeService.update(this.recipe);
+  }
 }

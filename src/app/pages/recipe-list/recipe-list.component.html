@@ -9,7 +9,6 @@
           {{ weekTitle }}
         </button>
         <div class="dropdown-menu">
-          <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" (click)="selectWeek(null)">Borrar</a>
           <a *ngFor="let week of weeks" class="dropdown-item" [routerLink]="['/recipe-list',week.key, activeDay < 0 ? 1 : activeDay]" >Semana {{ week.name }}</a>
         </div>
       </div>
@@ -30,6 +29,11 @@
           </li>
         </ul>
       </nav>
+    </div>
+  </div>
+  <div *ngIf="this.weekId" class="row">
+    <div class="col-2">
+      <h3>{{group}}</h3>
     </div>
   </div>
   <div *ngFor="let recipe of filteredRecipes" class="row recipe-card pointer" [routerLink]="['/recipe',recipe.key]">

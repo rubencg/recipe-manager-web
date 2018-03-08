@@ -22,6 +22,7 @@ export class RecipesOverviewComponent implements OnInit {
   foodTime: FoodTime = -1;
   weekName: string = "";
   groupId: Group = -1;
+  onlyFavorites: boolean = false;
 
   constructor(private recipeService: RecipeService, private weekService: WeekRecipeService) { }
 
@@ -57,7 +58,7 @@ export class RecipesOverviewComponent implements OnInit {
   filter(){
     this.timeTitle = Utils.getFoodTimeName(this.foodTime);
     this.groupTitle = Utils.getGroupName(this.groupId);
-    
+
     this.filteredRecipes = this.recipes;
 
     if(this.foodTime != -1){
@@ -73,9 +74,17 @@ export class RecipesOverviewComponent implements OnInit {
       this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.group == this.groupId);
     }
 
+    if(this.onlyFavorites){
+      this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.isFavorite);
+    }
+
     // if(this.filterText.length > 3){
     //   this.filteredRecipes = _.filter(this.filteredRecipes, (r: Recipe) => r.name.toLowerCase().includes(this.filterText.toLowerCase()));
     // }
+  }
+
+  getGroupName(group){
+    return Utils.getGroupName(+group);
   }
 
   selectTime(foodTime: FoodTime){

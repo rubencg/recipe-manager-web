@@ -9,7 +9,7 @@ export class RecipeService {
   recipeRef: Observable<any[]>;
   recipes: Recipe[];
 
-  constructor(private db: AngularFireDatabase) { 
+  constructor(private db: AngularFireDatabase) {
     this.recipeRef = db.list('recipes').snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
@@ -22,6 +22,10 @@ export class RecipeService {
 
   save(recipe: Recipe){
     return this.db.list('recipes').push(recipe);
+  }
+
+  update(recipe: Recipe){
+    this.db.list('recipes').update(recipe.key, recipe);
   }
 
 }
@@ -38,6 +42,7 @@ export interface Recipe {
   instructions?: string;
   foodTime?: FoodTime;
   group?: Group;
+  isFavorite?: boolean;
 }
 
 export interface Ingredient{
