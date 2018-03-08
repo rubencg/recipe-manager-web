@@ -18,7 +18,7 @@
         <span class="badge badge-secondary">{{group}}</span>
         <span class="badge badge-secondary">{{time}}</span>
       </div>
-      <div class="col-sm-2">
+      <div *ngIf="canSetFavorites" class="col-sm-2">
         <button *ngIf="!recipe.isFavorite" (click)="toggleFavorite()" type="button" class="btn btn-primary">Marcar como favorito</button>
         <button *ngIf="recipe.isFavorite" (click)="toggleFavorite()" type="button" class="btn btn-outline-primary">Quitar Favorito</button>
       </div>

@@ -87,6 +87,10 @@ export class RecipesOverviewComponent implements OnInit {
     return Utils.getGroupName(+group);
   }
 
+  getTimeName(time){
+    return Utils.getFoodTimeName(+time);
+  }
+
   selectTime(foodTime: FoodTime){
     this.foodTime = foodTime;
 

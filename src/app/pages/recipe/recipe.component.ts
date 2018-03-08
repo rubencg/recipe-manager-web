@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RecipeService, Recipe } from '../../services/recipe.service';
 import * as _ from 'lodash';
 import { Unit, Utils } from '../../models/interfaces';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-recipe',
@@ -15,8 +16,10 @@ export class RecipeComponent implements OnInit {
   group: string;
   time: string;
   filteredRecipes: Recipe[];
+  canSetFavorites: boolean = false;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService,
+    private userService: UserService) { }
 
   ngOnInit() {
     let sub = this.route.params.subscribe(params => {
@@ -27,6 +30,10 @@ export class RecipeComponent implements OnInit {
         this.group = Utils.getGroupName(+this.recipe.group);
         this.time = Utils.getFoodTimeName(+this.recipe.foodTime);
         this.filteredRecipes = _.filter(recipes, r => r.isFavorite && r.group == this.recipe.group && r.key != this.recipe.key);
+
+        this.userService.canSetFavorites().subscribe(config => {
+          this.canSetFavorites = config[0].canSetFavorites;
+        });
       });
 
    });
