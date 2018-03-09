@@ -76,8 +76,15 @@ export class RecipeListComponent implements OnInit {
       this.weekTitle = "Semana " + week.name;
       if(week){
         let weekRecipes = _.filter(week.recipes, (r: WeekRecipe) => r.DayOrderId == this.activeDay);
-        this.filteredRecipes = _.filter(this.recipes, (r: Recipe) => _.includes(_.map(weekRecipes, 'RecipeId'), r.key) );
-        this.group = Utils.getGroupName(+this.filteredRecipes[0].group);
+        this.filteredRecipes = _.chain(this.recipes)
+          .filter((r: Recipe) => _.includes(_.map(weekRecipes, 'RecipeId'), r.key) )
+          .orderBy((r: Recipe) => r.foodTime)
+          .value();
+        if(this.filteredRecipes[0]){
+          this.group = Utils.getGroupName(+this.filteredRecipes[0].group);
+        }else{
+          this.group = null;
+        }
       }
     }else{
       this.filteredRecipes = [];
