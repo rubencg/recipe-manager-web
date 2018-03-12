@@ -6,6 +6,10 @@
     cursor: pointer;
 }
 
+.no-underline:hover, .no-underline:visited, .no-underline:link, .no-underline:active{
+  text-decoration: none;
+}
+
 .header-container{
     margin: 1em;
 }

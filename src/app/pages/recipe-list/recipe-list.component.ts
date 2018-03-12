@@ -39,7 +39,7 @@ export class RecipeListComponent implements OnInit {
       this.recipes = recipes;
     });
     this.weekService.getAllWeeks().subscribe((weeks: Week[]) => {
-      this.weeks = weeks;
+      this.weeks = _.orderBy(weeks, (w: Week) => w.name);
       this.route.params.subscribe(params => {
         this.weekId = params['weekId'];
         if(+params['dayId']){
