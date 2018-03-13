@@ -30,7 +30,7 @@ export class RecipeComponent implements OnInit {
         this.recipe = _.first(_.filter(recipes, r => r.key == this.id));
         this.group = Utils.getGroupName(+this.recipe.group);
         this.time = Utils.getFoodTimeName(+this.recipe.foodTime);
-        this.favoriteRecipes = _.filter(recipes, r => r.isFavorite && r.group == this.recipe.group && r.key != this.recipe.key);
+        this.favoriteRecipes = _.filter(recipes, r => r.isFavorite && r.foodTime == this.recipe.foodTime && r.group == this.recipe.group && r.key != this.recipe.key);
         this.similarRecipes = _.filter(recipes, r => r.group == this.recipe.group && r.foodTime == this.recipe.foodTime && r.key != this.recipe.key);
         this.userService.canSetFavorites().subscribe(config => {
           this.canSetFavorites = config[0].canSetFavorites;
