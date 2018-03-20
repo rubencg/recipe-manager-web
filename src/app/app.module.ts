@@ -8,8 +8,13 @@ import { AppComponent } from './app.component';
 import { environment } from './environment';
 import { AuthenticationService } from './services/authentication.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { PagesModule } from './pages/pages.module';
 import { AuthGuard } from './guards/auth.guard';
+import { RecipeService } from './services/recipe.service';
+import { WeekRecipeService } from './services/week-recipe.service';
+import { GroceryService } from './services/grocery.service';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -22,7 +27,7 @@ import { AuthGuard } from './guards/auth.guard';
     AngularFireModule.initializeApp(environment.firebase),
     PagesModule
   ],
-  providers: [ AuthenticationService, AngularFireAuth, AuthGuard ],
+  providers: [ AuthenticationService, AngularFireAuth, AuthGuard, RecipeService, AngularFireDatabase, WeekRecipeService, GroceryService, UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

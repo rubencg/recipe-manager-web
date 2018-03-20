@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+//@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap-material-design/scss/bootstrap-material-design";
+
+.pointer{
+    cursor: pointer;
+}
+
+.no-underline:hover, .no-underline:visited, .no-underline:link, .no-underline:active{
+  text-decoration: none;
+}
+
+.header-container{
+    margin: 1em;
+}
+
+.header-container > span {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.app-button{
+    margin: 8px 0 0 0;
+}

@@ -1,0 +1,55 @@
+<div class="container-fluid recipe-list-container">
+  <div *ngIf="!this.weeks" class="row justify-content-md-center">
+    Cargando...
+  </div>
+  <div *ngIf="this.weeks" class="row">
+    <div class="col-2">
+      <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ weekTitle }}
+        </button>
+        <div class="dropdown-menu">
+          <a *ngFor="let week of weeks" class="dropdown-item" [routerLink]="['/recipe-list',week.key, activeDay < 0 ? 1 : activeDay]">Semana {{ week.name }}</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="weekId" class="col-10 mx-auto">
+      <nav aria-label="Page navigation example pagination-container">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" (click)="previous()">Anterior</a>
+          </li>
+          <li *ngFor="let day of days" class="page-item" [class.active]="day.dayId == activeDay">
+            <a class="page-link" [routerLink]="['/recipe-list',weekId, day.dayId]">
+              {{ day.name }}
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="next()">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div *ngIf="group" class="row">
+    <div class="col-2">
+      <h3>{{group}}</h3>
+    </div>
+  </div>
+  <div *ngFor="let recipe of filteredRecipes" class="row recipe-card pointer">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          {{ getFoodTimeName(recipe.foodTime) }}
+        </div>
+        <a [routerLink]="['/recipe',recipe.key]" class="no-underline">
+        <div class="card-body">
+          <img class="rounded-circle recipe-image" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2275%22%20height%3D%2275%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2075%2075%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1603cc5bac5%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1603cc5bac5%22%3E%3Crect%20width%3D%2275%22%20height%3D%2275%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2219.34375%22%20y%3D%2242.15%22%3E75x75%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+            alt="...">
+          <h4 class="card-title recipe-title">{{ recipe.name }}</h4>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

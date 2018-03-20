@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
 
   authState: any = null;
+  userId: string;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) {
     this.authState = this.afAuth.authState
     .switchMap(user => {
       if (user) {
+        this.userId = this.afAuth.auth.currentUser.uid;
         return Observable.of(user);
       } else {
         return Observable.of(null)
@@ -23,8 +25,28 @@ export class AuthenticationService {
    }
 
   loginWithFacebook() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(() =>{
-      this.router.navigate(['/home']);
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then((data) =>{
+      this.router.navigate(['/recipe-list']);
+    });
+  }
+
+  authorizeUser(data){
+    if(this.isAuthorized(data.user.email)){
+      this.router.navigate(['/recipe-list']);
+    }else{
+      this.router.navigate(['/login']);
+    }
+  }
+
+  // Cambiar para que vaya a base de datos y cheque por los correos autorizados
+  isAuthorized(email: string): boolean{
+    return email == "rubencg88@gmail.com" || email == "sarahimirelesr@gmail.com" || email == "rcardenas@tacitknowledge.com"
+      || email == "andrescg13@gmail.com";
+  }
+
+  loginWithGoogle() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data) =>{
+      this.router.navigate(['/recipe-list']);
     });
   }
 

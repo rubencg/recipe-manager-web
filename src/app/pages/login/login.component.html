@@ -1,4 +1,19 @@
-<p>
-  login works!
-</p>
-<button (click)="login()">Login with Facebook</button>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm" class="border border-primary rounded login">
+      <div>
+          <h3>Login</h3>
+          <span>Si ya eres usuario, por favor ingresa con tu cuenta activada.</span>
+      </div>
+      <div class="loginButtons">
+        <button (click)="loginWithFacebook()" type="button" class="btn btn-primary btn-lg btn-block">Ingresa con Facebook</button>
+        <button (click)="loginWithGoogle()" type="button" class="btn btn-danger btn-lg btn-block">Ingresa con Google</button>
+      </div>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="header-container">
+  <span>Recetas</span>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="btn-group">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ weekTitle }}
+          </button>
+          <div class="dropdown-menu">
+            <a *ngIf="weekTitle != 'Semana'" class="dropdown-item" (click)="selectWeek(null)">Borrar</a>
+            <a *ngFor="let week of weeks" class="dropdown-item" (click)="selectWeek(week.name)">Semana {{ week.name }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="btn-group">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ timeTitle }}
+          </button>
+          <div class="dropdown-menu">
+            <a *ngIf="timeTitle != 'Hora del Dia'" class="dropdown-item" (click)="selectTime(-1)">Borrar</a>
+            <a class="dropdown-item" (click)="selectTime(1)">Desayuno</a>
+            <a class="dropdown-item" (click)="selectTime(2)">A.M. Snack</a>
+            <a class="dropdown-item" (click)="selectTime(3)">Comida</a>
+            <a class="dropdown-item" (click)="selectTime(4)">P.M. Snack</a>
+            <a class="dropdown-item" (click)="selectTime(5)">Cena</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="btn-group">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ groupTitle }}
+          </button>
+          <div class="dropdown-menu">
+            <a *ngIf="groupTitle != 'Grupo'" class="dropdown-item" (click)="selectGroup(-1)">Borrar</a>
+            <a class="dropdown-item" (click)="selectGroup(1)">Grupo A</a>
+            <a class="dropdown-item" (click)="selectGroup(2)">Grupo B</a>
+            <a class="dropdown-item" (click)="selectGroup(3)">Grupo C</a>
+            <a class="dropdown-item" (click)="selectGroup(4)">Grupo D</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="onlyFavorites" (change)="filter()"> Solo favoritos
+        </label>
+      </div>
+      <!-- <div class="col-lg-3">
+        <div class="input-group">
+           <input type="text" class="form-control" placeholder="Palabra clave..." aria-label="Palabra clave..." [(ngModel)]="filterText" (input)="search($event.target.value)">
+         <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" (click)="search()">Buscar!</button>
+          </span>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- Poner esto en un componente -->
+<div class="d-flex flex-wrap justify-content-center">
+  <div class="card p-2 recipe-card pointer" *ngFor="let r of filteredRecipes">
+    <a [routerLink]="['/recipe',r.key]" class="no-underline">
+    <img *ngIf="!r.image" class="card-img-top" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1606be63fc8%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1606be63fc8%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22118.0859375%22%20y%3D%2297.2%22%3E318x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+      alt="Card image cap">
+    <img *ngIf="r.image" class="card-img-top" [src]="r.image" alt="Card image cap">
+    <div class="card-body recipe-card-body">
+      <h5>{{r.name}}</h5>
+      <span class="badge badge-secondary">{{getGroupName(r.group)}}</span>
+      <span class="badge badge-secondary">{{getTimeName(r.foodTime)}}</span>
+      <span class="badge badge-primary">Prep: {{r.prepTime}} min</span>
+      <span class="badge badge-primary">Cook: {{r.cookTime}} min</span>
+      <span class="badge badge-danger">Serves: {{r.serves}}</span>
+    </div>
+  </a>
+  </div>
+</div>
+<button type="button" class="btn btn-primary bmd-btn-fab float-right add-button" [routerLink]="['/recipes/add']">
+  <i class="material-icons">add</i>
+</button>
