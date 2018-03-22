@@ -1,5 +1,17 @@
 import { Recipe } from "../services/recipe.service";
 
+export class FileUpload {
+
+  $key: string;
+  name: string;
+  url: string;
+  file: File;
+
+  constructor(file: File) {
+    this.file = file;
+  }
+}
+
 export enum Unit {
     oz,
     pz,

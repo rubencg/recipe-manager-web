@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService, Recipe } from '../../services/recipe.service';
 import * as _ from 'lodash';
-import { Unit, Utils } from '../../models/interfaces';
+import { Unit, Utils, FileUpload } from '../../models/interfaces';
 import { UserService } from '../../services/user.service';
+import { UploadFileService } from '../../services/upload-file.service';
 
 @Component({
   selector: 'app-recipe',
@@ -19,8 +20,15 @@ export class RecipeComponent implements OnInit {
   favoriteRecipes: Recipe[];
   canSetFavorites: boolean = false;
 
+  // Upload
+  selectedFiles: FileList;
+  currentFileUpload: FileUpload;
+  progress: { percentage: number } = { percentage: 0 };
+  uploads: FileUpload[];
+
+
   constructor(private route: ActivatedRoute, private recipeService: RecipeService,
-    private userService: UserService) { }
+    private userService: UserService, private uploadService: UploadFileService) { }
 
   ngOnInit() {
     let sub = this.route.params.subscribe(params => {
@@ -35,21 +43,51 @@ export class RecipeComponent implements OnInit {
         this.userService.canSetFavorites().subscribe(config => {
           this.canSetFavorites = config[0].canSetFavorites;
         });
+
+        this.uploadService.getFileUploads().subscribe(uploads => this.uploads = uploads);
       });
 
-   });
+    });
   }
 
-  getUnitName(unitId: number){
+  getUnitName(unitId: number) {
     return Utils.getUnitName(unitId);
   }
 
-  getGroupName(group){
+  getGroupName(group) {
     return Utils.getGroupName(+group);
   }
 
-  toggleFavorite(){
+  toggleFavorite() {
     this.recipe.isFavorite = this.recipe.isFavorite ? false : true;
     this.recipeService.update(this.recipe);
+  }
+
+  // Upload
+  selectFile(event) {
+    const file = event.target.files.item(0)
+
+    if (file.type.match('image.*')) {
+      this.selectedFiles = event.target.files;
+    } else {
+      alert('invalid format!');
+    }
+  }
+
+  upload() {
+    const file = this.selectedFiles.item(0)
+    this.selectedFiles = undefined
+
+    this.currentFileUpload = new FileUpload(file);
+    this.uploadService.pushFileToStorage(this.currentFileUpload, this.recipe, this.progress);
+  }
+
+  remove(){
+    let file = _.chain(this.uploads)
+      .filter((u: FileUpload) => u.name == this.recipe.imageName)
+      .first()
+      .value();
+
+    this.uploadService.deleteFileUpload(file, this.recipe);
   }
 }

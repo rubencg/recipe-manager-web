@@ -38,7 +38,8 @@ export interface Recipe {
   cookTime?: number;
   difficulty?: Difficulty;
   ingredients?: Ingredient[];
-  image?: string;
+  imageUrl?: string;
+  imageName?: string;
   instructions?: string;
   foodTime?: FoodTime;
   group?: Group;
