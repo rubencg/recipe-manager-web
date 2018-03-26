@@ -20,7 +20,7 @@ export class RecipeService {
     return this.recipeRef;
   }
 
-  save(recipe: Recipe){
+  save(recipe: Recipe) : any {
     return this.db.list('recipes').push(recipe);
   }
 

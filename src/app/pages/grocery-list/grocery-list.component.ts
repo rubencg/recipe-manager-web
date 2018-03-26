@@ -80,7 +80,7 @@ export class GroceryListComponent implements OnInit {
       });
     });
 
-    this.groups = _.chain(ingredients)
+    this.groups = <IngredientGroup[]> _.chain(ingredients)
       .groupBy((i: Ingredient) => i.foodGroup)
       .map((i: Ingredient[], key: FoodGroup) => {
         let g: IngredientGroup = {
