@@ -4,10 +4,10 @@
     <img *ngIf="recipe.imageUrl" class="card-img-top recipe-image" [src]="recipe.imageUrl" alt="Card image cap">
     <div class="card-body recipe-card-body">
       <h5>{{recipe.name}}</h5>
-      <span class="badge badge-secondary">{{getGroupName(recipe.group)}}</span>
+      <span class="badge badge-important">{{getGroupName(recipe.group)}}</span>
       <span class="badge badge-primary">Prep: {{recipe.prepTime}} min</span>
-      <span class="badge badge-primary">Cook: {{recipe.cookTime}} min</span>
-      <span class="badge badge-danger">Serves: {{recipe.serves}}</span>
+      <span class="badge badge-secondary">Cook: {{recipe.cookTime}} min</span>
+      <span class="badge badge-terciary">Serves: {{recipe.serves}}</span>
     </div>
   </a>
 </div>

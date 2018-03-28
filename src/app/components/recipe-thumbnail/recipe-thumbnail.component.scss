@@ -1,11 +1,40 @@
 .recipe-card{
   margin-bottom: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: space-between;
 }
 .recipe-card-body{
   text-align: center;
 }
+.recipe-card-body h5{
+  font-size: 12px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  text-transform: capitalize;
+  word-break: break-word;
+}
 .recipe-image{
   width: 318px;
   height: 180px;
+  object-fit: cover;
+}
+.badge-important {
+  color: #fff;
+  background-color: #fd5699;
+}
+.badge-primary {
+  color: #fff;
+  background-color: #3ac4a9;
+}
+.badge-secondary {
+  color: #fff;
+  background-color: #4f94fb;
+}
+.badge-terciary {
+  color: #fff;
+  background-color: #736F66;
 }
 

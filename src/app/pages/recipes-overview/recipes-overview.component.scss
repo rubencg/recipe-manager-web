@@ -4,3 +4,12 @@
 .add-button{
     margin-right: 1rem;
 }
+
+.width-columns-container{
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    align-items: center;
+}
