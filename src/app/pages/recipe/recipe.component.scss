@@ -1,26 +1,43 @@
 .recipe-container{
     margin-top: 20px;
 }
-
 .recipe{
     margin-top: 20px;
 }
-
 .image-container{
     margin-bottom: 10px;
 }
-
 .image-div{
     margin: 0 auto;
 }
-
 .image{
-    height: 525px;
-    width: 700px;
+    height: auto;
 }
-
 .image-black{
     background-color: black;
     height: 300px;
 }
-
+.responsive{
+    max-width: 100%;
+    height: auto;
+    min-height:4em;
+}
+h1 {
+    text-transform: capitalize;
+}
+.badge-important {
+    color: #fff;
+    background-color: #fd5699;
+  }
+  .badge-primary {
+    color: #fff;
+    background-color: #3ac4a9;
+  }
+  .badge-secondary {
+    color: #fff;
+    background-color: #4f94fb;
+  }
+  .badge-terciary {
+    color: #fff;
+    background-color: #736F66;
+  }
